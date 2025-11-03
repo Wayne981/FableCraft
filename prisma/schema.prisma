@@ -1,0 +1,170 @@
+// Prisma schema for FableCraft eCommerce platform
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - supports both Artisan and Buyer roles
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?   // Null for OAuth users
+  image         String?
+  role          UserRole  @default(BUYER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  products      Product[]  // Products uploaded by artisan
+  orders        Order[]    // Orders placed by buyer
+  cartItems     CartItem[]
+}
+
+enum UserRole {
+  ARTISAN
+  BUYER
+}
+
+// NextAuth Account model
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// NextAuth Session model
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// NextAuth Verification Token model
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Product model - represents items uploaded by artisans
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  price       Float
+  region      String   // Geographic region/origin
+  latitude    Float?   // For map display
+  longitude   Float?   // For map display
+  imageUrls   String[] // Array of image URLs from Cloudinary
+  metadata    String?  @db.Text // Authenticity metadata
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Foreign keys
+  artisanId String
+  artisan   User   @relation(fields: [artisanId], references: [id], onDelete: Cascade)
+
+  // Relations
+  story     Story?
+  cartItems CartItem[]
+  orderItems OrderItem[]
+
+  @@index([artisanId])
+  @@index([region])
+}
+
+// Story model - the narrative behind each product
+model Story {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign keys
+  productId String  @unique
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+// CartItem model - items in user's shopping cart
+model CartItem {
+  id        String   @id @default(cuid())
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign keys
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId]) // User can have only one cart item per product
+  @@index([userId])
+}
+
+// Order model - completed purchases
+model Order {
+  id        String      @id @default(cuid())
+  total     Float
+  status    OrderStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Foreign keys
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relations
+  items OrderItem[]
+
+  @@index([userId])
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+// OrderItem model - junction table for Order and Product (many-to-many)
+model OrderItem {
+  id       String @id @default(cuid())
+  quantity Int
+  price    Float  // Price at time of order
+
+  // Foreign keys
+  orderId   String
+  productId String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
