@@ -74,7 +74,7 @@ export default function ProductsPage() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Discover Artisan Products</h1>
           <p className="text-muted-foreground">
-            Browse unique handmade products from artisans around the world
+            Browse unique handmade products from artisans across India
           </p>
         </div>
 

@@ -241,7 +241,8 @@ export default function CheckoutPage() {
                 className="w-full"
                 disabled={isProcessing}
               >
-                {isProcessing ? 'Processing...' : `Pay ${formatPrice(total)}`}
+                {isProcessing ? 'Processing...' : `Pay INR ${formatPrice(total)}`}
+
               </Button>
             </form>
           </div>

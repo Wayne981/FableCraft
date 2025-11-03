@@ -24,7 +24,7 @@ export default function HomePage() {
     {
       icon: Store,
       title: 'For Artisans',
-      description: 'Showcase your handmade products and share their stories with customers worldwide.',
+      description: 'Showcase your handmade products and share their stories with customers across India.',
     },
     {
       icon: ShoppingBag,
@@ -34,7 +34,7 @@ export default function HomePage() {
     {
       icon: Map,
       title: 'Interactive Map',
-      description: 'Explore products by region and discover artisans from around the world.',
+      description: 'Explore products by region and discover talented artisans from across India.',
     },
     {
       icon: ShieldCheck,
@@ -48,18 +48,18 @@ export default function HomePage() {
     },
     {
       icon: Globe,
-      title: 'Global Community',
-      description: 'Connect artisans and buyers across borders, celebrating diverse craftsmanship.',
+      title: 'Indian Community',
+      description: 'Connect artisans and buyers across states, celebrating diverse craftsmanship.',
     },
   ]
 
   const regions = [
-    'Asia',
-    'Africa',
-    'Europe',
-    'South America',
-    'North America',
-    'Oceania',
+    'Deccan',
+    'Himalayas',
+    'NorthEast',
+    'Coastline',
+    'Desertland',
+    'Gangetic',
   ]
 
   return (
@@ -83,10 +83,10 @@ export default function HomePage() {
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Connecting Artisans with the World
+            Connecting Indian Artisans with the Nation
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discover authentic handmade products with rich stories. Support artisans, celebrate craftsmanship, and own unique pieces with cultural heritage.
+            Discover authentic handmade creations from every corner of India. Support local artisans, celebrate regional craftsmanship, and own timeless pieces rooted in India’s cultural heritage.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
               <Button size="lg" asChild className="min-w-[200px]">
@@ -117,7 +117,7 @@ export default function HomePage() {
               Why Choose FableCraft?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A platform built for artisans and buyers, celebrating authentic craftsmanship and cultural heritage.
+            A platform dedicated to Indian artisans and buyers, celebrating the beauty, diversity, and heritage of Indian craftsmanship.
             </p>
           </motion.div>
 
@@ -166,7 +166,7 @@ export default function HomePage() {
               Discover Artisans by Region
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore handmade products from artisans around the world. Each region brings unique traditions and craftsmanship.
+              Explore handmade products from artisans across India. Each region brings unique traditions and craftsmanship.
             </p>
           </motion.div>
 
@@ -247,8 +247,8 @@ export default function HomePage() {
               </Card>
               <Card className="bg-primary/5">
                 <CardContent className="p-6 text-center space-y-2">
-                  <p className="text-4xl font-bold">50+</p>
-                  <p className="text-muted-foreground">Countries</p>
+                  <p className="text-4xl font-bold">28</p>
+                  <p className="text-muted-foreground">States</p>
                 </CardContent>
               </Card>
               <Card className="bg-primary/5">

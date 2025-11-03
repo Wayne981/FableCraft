@@ -9,10 +9,14 @@ export function cn(...inputs: ClassValue[]) {
 
 // Format price to currency
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
+  const USD_TO_INR = 88.2; // Current exchange rate (update as needed)
+  const priceInINR = price * USD_TO_INR;
+  
+  return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'USD',
-  }).format(price)
+    currency: 'INR',
+    maximumFractionDigits: 0, // No decimals for INR
+  }).format(priceInINR)
 }
 
 // Format date to readable string

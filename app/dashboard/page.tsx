@@ -58,7 +58,7 @@ export default async function DashboardPage() {
       },
       {
         title: 'Revenue',
-        value: `$${totalRevenue.toFixed(2)}`,
+        value: `INR${totalRevenue.toFixed(2)}`,
         description: 'Total earnings',
         icon: DollarSign,
       },
@@ -88,7 +88,7 @@ export default async function DashboardPage() {
       },
       {
         title: 'Total Spent',
-        value: `$${totalSpent.toFixed(2)}`,
+        value: `INR${totalSpent.toFixed(2)}`,
         description: 'Amount spent',
         icon: DollarSign,
       },

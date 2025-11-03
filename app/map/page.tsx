@@ -43,7 +43,7 @@ export default function MapPage() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Explore Products on Map</h1>
           <p className="text-muted-foreground">
-            Discover artisan products from around the world. Click on markers to view product details.
+            Discover artisan products from across India. Click on markers to view product details.
           </p>
         </div>
 

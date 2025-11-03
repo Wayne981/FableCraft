@@ -14,7 +14,7 @@ export function Footer() {
               <span className="text-xl font-bold">FableCraft</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Connecting artisans with customers worldwide. Discover authentic handmade products with stories behind them.
+            Connecting Indian Artisans with the Nation. Discover authentic handmade products with stories behind them.
             </p>
           </div>
 
