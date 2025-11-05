@@ -1,5 +1,5 @@
 Main Commands to Run the Application 
 
 
-npm i
+npm i and
 npm run dev
